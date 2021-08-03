@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 mt-5">
+                <h3 class="text-center">Your Cart</h3>
+                {% if cart_items %}
+                <div class="table-responsive">
+                    <table class="table table-light">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart in cart_items %}
+                        <tr>
+                            <td>{{ cart.item.dish_name }}</td>
+                            <td>{{ cart.item.description }}</td>
+                            <td>{{ cart.item.price }}</td>
+                            
+                            <td><a class="btn btn-danger" href="/cart_remove/?id={{ cart.id }}">Delete</a></td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h4 class="text-center">Sorry, Your Cart is Empty....Please add Items!!!</h4>
+                {% endif %}
+            </div>
+            <div class="col-sm-3 mt-5 mb-3">
+                <div class="content-section">
+                    <h3 class="text-center">Order Summary</h3>
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-light text-center text-dark">Total: {{ total }}</li>
+                        <li class="list-group-item list-group-item-light text-center text-dark">Number of Orders: {{ count }}</li>
+                        
+                        <form action="/ordered/" method="POST">
+                            {% csrf_token %}
+                        <li class="list-group-item list-group-item-light text-center text-dark"><input type="text" placeholder="Enter your address" name="address" required></li>
+                        <li class="list-group-item list-group-item-light text-center text-dark"><input type="number" placeholder="Enter your contact no." name="contact_no" minlength="10" required></li>
+                        <li class="list-group-item list-group-item-light text-center text-dark"><input type="number" placeholder="Pin Code" name="pin_code" minlength="6" required></li>
+                        
+                        <li class="list-group-item list-group-item-light text-center text-dark"><input type="submit" value="Proceed To Checkout" class="btn btn-primary"></li>
+
+                        </form>
+                        <li class="list-group-item list-group-item-light text-center"><a class="btn btn-success" href="/">Continue Buying</a></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

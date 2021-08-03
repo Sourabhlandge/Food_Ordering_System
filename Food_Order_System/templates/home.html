@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+ 
+    
+<div class="container">
+  <h2>Restaurant Table</h2>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Restaurant Name</th>
+        <th>Restaurant Address</th>
+        <th>Restaurant Contact No.</th>
+      </tr>
+    </thead>
+    <tbody>
+	 {% for rest in restaurants %}
+      <tr>
+        <td><a href="/getitem/?id={{ rest.id }}" role="button" class="btn btn-danger">{{rest.restaurant_name}}</a></td>
+        <td>{{ rest.restaurant_location}}</td>
+        <td>{{ rest.restaurant_contact_no}}</td>
+      </tr>
+	  {% endfor %}
+    </tbody>
+  </table>
+</div>
+  </div>
+{% endblock content %}

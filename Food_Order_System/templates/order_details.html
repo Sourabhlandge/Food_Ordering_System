@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+                <h3 class="text-center">Active Orders</h3>
+                {% if items %}
+                <h4 class="text-center">Total Bill Amount: {{total}} for {{ count }} Orders.</h4>
+                <h6 class="text-center">Please Pay Either via ATM or Credit Card or Cash on Delivery!</h6>
+                <div class="table-responsive">
+                    <table class="table table-light">
+                        <thead>
+                        <tr>
+                            <th scope="col">Ordered</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <!-- <th scope="col">Address</th>
+                            <th scope="col">Contact No</th>
+                            <th scope="col">Pin Code</th> -->
+                            <th scope="col">Price</th>
+                            <th scope="col">Order Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for item_active in items %}
+                        <tr>
+                            <td>{{ item_active.ordered_date }}</td>
+                            <td>{{ item_active.item.dish_name }}</td>
+                            <td>{{ item_active.item.description }}</td>
+                            <!-- <td>{{ item_active.item.address }}</td>
+                            <td>{{ item_active.item.contact_no }}</td>
+                            <td>{{ item_active.item.pin_code }}</td> -->
+                            <td>{{ item_active.item.price }}</td>
+                            <td>{{ item_active.status }}</td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h4 class="text-center">Sorry, you have not ordered any item yet!!!</h4>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+                <h3 class="text-center">Delivered Orders</h3>
+                {% if cart_items %}
+                <div class="table-responsive">
+                    <table class="table table-light">
+                        <thead>
+                        <tr>
+                            <th scope="col">Ordered</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <!-- <th scope="col">Address</th>
+                            <th scope="col">Contact No</th>
+                            <th scope="col">Pin Code</th> -->
+                            <th scope="col">Price</th>
+                            <th scope="col">Order Status</th>
+                            <th scope="col">Delivery Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart in cart_items %}
+                        <tr>
+                            <td>{{ cart.ordered_date }}</td>
+                            <td>{{ cart.item.dish_name }}</td>
+                            <td>{{ cart.item.description }}</td>
+                            <!-- <td>{{ cart.item.address }}</td>
+                            <td>{{ cart.item.contact_no }}</td>
+                            <td>{{ cart.item.pin_code }}</td> -->
+                            <td>{{ cart.item.price }}</td>
+                            <td>{{ cart.status }}</td>
+                            <td>{{ cart.delivery_date }}</td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h4 class="text-center">Sorry, you have not ordered any item yet!!!</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
